@@ -5,7 +5,6 @@
       <permission name="android.permission.WRITE_SECURE_SETTINGS" />
       <permission name="android.permission.MANAGE_USB" />
       <permission name="android.permission.INTERACT_ACROSS_USERS" />
-      <permission name="mediatek.permission.ACCESS_APU_SYS" />
       <permission name="android.permission.DUMP" />
       <permission name="android.permission.LOG_COMPAT_CHANGE" />
       <permission name="android.permission.READ_COMPAT_CHANGE_CONFIG" />
