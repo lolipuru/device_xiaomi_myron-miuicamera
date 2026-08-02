@@ -1,9 +1,11 @@
 binder_use(platform_app)
 binder_call(platform_app, hal_camera_default)
 
+hal_client_domain(platform_app, vendor_hal_unsignedhexlp)
+hal_client_domain(platform_app_36, vendor_hal_qspmhal)
+hal_client_domain(platform_app_36, vendor_hal_unsignedhexlp)
+
 allow platform_app hal_aidlbgservice_service:service_manager find;
-allow platform_app hal_misys_service:service_manager find;
-allow platform_app hal_postprocservice_service:service_manager find;
 
 allow platform_app adsprpcd_file:dir { open read search };
 
@@ -19,3 +21,21 @@ get_prop(platform_app, vendor_camera_sensor_prop)
 get_prop(platform_app, vendor_display_prop)
 get_prop(platform_app, vendor_displayfeature_prop)
 get_prop(platform_app, vendor_panel_info_prop)
+get_prop(platform_app_36, vendor_camera_sensor_prop)
+get_prop(platform_app_36, vendor_audio_prop)
+get_prop(platform_app_36, vendor_camera_p3enable_prop)
+get_prop(platform_app_36, vendor_displayfeature_prop)
+
+allow platform_app hal_aidlbgservice_service:service_manager find;
+allow platform_app hal_postprocservice_service:service_manager find;
+allow platform_app proc_pressure_cpu:file r_file_perms;
+allow platform_app proc_pressure_mem:file r_file_perms;
+allow platform_app self:qipcrtr_socket { create getattr read write setopt };
+allow platform_app_36 hal_aidlbgservice_service:service_manager find;
+allow platform_app_36 hal_camera_default:binder { call transfer };
+allow platform_app_36 hal_postprocservice_service:service_manager find;
+allow platform_app_36 proc_pressure_cpu:file r_file_perms;
+allow platform_app_36 proc_pressure_io:file r_file_perms;
+allow platform_app_36 proc_pressure_mem:file r_file_perms;
+allow platform_app_36 self:qipcrtr_socket { create getattr read write setopt };
+allow platform_app_36 vendor_miev_device:chr_file rw_file_perms;
