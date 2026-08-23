@@ -1,0 +1,27 @@
+From e5616e1f1c7dd12d88b2a21aa3ed641a673db9e5 Mon Sep 17 00:00:00 2001
+From: lolipuru <banstellazz@gmail.com>
+Date: Sun, 23 Aug 2026 08:43:32 +0000
+Subject: [PATCH 5/5] remove R&D permission popup
+
+---
+ smali/com/android/camera/a$c.smali | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/smali/com/android/camera/a$c.smali b/smali/com/android/camera/a$c.smali
+index 7e605d630..7e9fdb5ee 100644
+--- a/smali/com/android/camera/a$c.smali
++++ b/smali/com/android/camera/a$c.smali
+@@ -77,10 +77,6 @@
+     goto/16 :goto_1
+ 
+     :pswitch_1
+-    const v0, 0x7f140c68
+-
+-    invoke-static {v2, v0}, LF1/C4;->g(Landroid/app/Activity;I)V
+-
+     return-void
+ 
+     :pswitch_2
+-- 
+2.43.0
+

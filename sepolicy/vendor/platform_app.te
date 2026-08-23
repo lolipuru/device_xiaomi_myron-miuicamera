@@ -1,9 +1,10 @@
 binder_use(platform_app)
 binder_call(platform_app, hal_camera_default)
 
-allow platform_app hal_aidlbgservice_service:service_manager find;
-allow platform_app hal_misys_service:service_manager find;
-allow platform_app hal_postprocservice_service:service_manager find;
+allow platform_app_36 hal_aidlbgservice_service:service_manager find;
+allow platform_app_36 hal_misys_service:service_manager find;
+allow platform_app_36 hal_postprocservice_service:service_manager find;
+allow platform_app_36 vendor_miev_device:chr_file rw_file_perms;
 
 allow platform_app adsprpcd_file:dir { open read search };
 
