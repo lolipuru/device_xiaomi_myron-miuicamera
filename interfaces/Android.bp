@@ -1,0 +1,36 @@
+aidl_interface {
+    name: "vendor.xiaomi.hardware.misys.common",
+    vendor_available: true,
+    srcs: [
+        "vendor/xiaomi/hardware/misys/common/*.aidl",
+    ],
+    stability: "vintf",
+    owner: "xiaomi",
+    backend: {
+        cpp: {
+            enabled: true,
+        },
+        java: {
+            platform_apis: true,
+        },
+        ndk: {
+            enabled: true,
+        },
+    },
+    frozen: true,
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+        {
+            version: "2",
+            imports: [],
+        },
+        {
+            version: "3",
+            imports: [],
+        },
+    ],
+
+}
