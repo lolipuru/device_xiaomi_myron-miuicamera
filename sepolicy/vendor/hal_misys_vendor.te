@@ -1,0 +1,14 @@
+type hal_misys_vendor, domain;
+type hal_misys_vendor_exec, exec_type, vendor_file_type, file_type;
+
+type hal_misys_vendor_service, hal_service_type, service_manager_type;
+
+init_daemon_domain(hal_misys_vendor)
+binder_use(hal_misys_vendor)
+
+allow hal_misys_vendor hal_misys_vendor_service:service_manager { add find };
+allow hal_misys_vendor mnt_vendor_file:dir search;
+allow hal_misys_vendor vendor_camera_data_file:dir create_dir_perms;
+allow hal_misys_vendor vendor_camera_data_file:file create_file_perms;
+allow hal_misys_vendor appdomain:fd use;
+allow platform_app hal_misys_vendor_service:service_manager find;

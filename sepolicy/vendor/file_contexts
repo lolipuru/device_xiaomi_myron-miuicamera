@@ -1,0 +1,2 @@
+# misys dummy
+/vendor/bin/hw/vendor\.xiaomi\.hardware\.misys-service    u:object_r:hal_misys_vendor_exec:s0

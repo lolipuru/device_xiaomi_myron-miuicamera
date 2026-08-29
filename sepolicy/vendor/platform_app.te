@@ -1,5 +1,9 @@
 binder_use(platform_app)
 binder_call(platform_app, hal_camera_default)
+binder_call(platform_app, hal_misys_vendor)
+binder_call(hal_misys_vendor, platform_app)
+binder_call(platform_app_36, hal_misys_vendor)
+binder_call(hal_misys_vendor, platform_app_36)
 
 hal_client_domain(platform_app, vendor_hal_unsignedhexlp)
 hal_client_domain(platform_app_36, vendor_hal_qspmhal)
@@ -33,9 +37,11 @@ allow platform_app proc_pressure_mem:file r_file_perms;
 allow platform_app self:qipcrtr_socket { create getattr read write setopt };
 allow platform_app_36 hal_aidlbgservice_service:service_manager find;
 allow platform_app_36 hal_camera_default:binder { call transfer };
+allow platform_app_36 hal_misys_vendor_service:service_manager find;
 allow platform_app_36 hal_postprocservice_service:service_manager find;
 allow platform_app_36 proc_pressure_cpu:file r_file_perms;
 allow platform_app_36 proc_pressure_io:file r_file_perms;
 allow platform_app_36 proc_pressure_mem:file r_file_perms;
 allow platform_app_36 self:qipcrtr_socket { create getattr read write setopt };
-allow platform_app_36 vendor_miev_device:chr_file rw_file_perms;
+allow platform_app_36 vendor_miev_device:chr_file write;
+allow platform_app_36 hal_misys_vendor_service:service_manager find;
