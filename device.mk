@@ -10,6 +10,10 @@ $(call inherit-product, vendor/xiaomi/myron-miuicamera/myron-miuicamera-vendor.m
 # Camera
 $(call soong_config_set_bool,camera,override_format_from_reserved,true)
 
+# Hypsys_system
+PRODUCT_PACKAGES += \
+    vendor.xiaomi.hardware.misys-service
+
 # Public libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries-xiaomi.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/public.libraries-xiaomi.txt
