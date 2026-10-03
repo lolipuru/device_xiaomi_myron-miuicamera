@@ -132,8 +132,8 @@ MiSysImpl::MiSysImpl() {
 ScopedAStatus MiSysImpl::IsExists(const std::string& path, const std::string& file, bool* _aidl_return) {
     const std::string fullPath = filePath(path, file);
     *_aidl_return = (access(fullPath.c_str(), F_OK) == 0);
-    if (*_aidl_return && !repairWatermarkPath(fullPath)) {
-        return ioError("Set permissions", fullPath);
+    if (*_aidl_return && isWatermarkPath(fullPath)) {
+        repairWatermarkPath(fullPath);
     }
     return ScopedAStatus::ok();
 }
