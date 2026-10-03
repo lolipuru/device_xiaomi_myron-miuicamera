@@ -6,6 +6,7 @@ namespace aidl::vendor::xiaomi::hardware::misys::common {
 
 class MiSysImpl : public BnMiSysImpl {
 public:
+    MiSysImpl();
     ndk::ScopedAStatus IsExists(const std::string& path, const std::string& file, bool* _aidl_return) override;
     ndk::ScopedAStatus MiSysCreateFolder(const std::string& path, const std::string& folder) override;
     ndk::ScopedAStatus MiSysCreateFolderMode(const std::string& path, const std::string& folder, int32_t perm) override;
