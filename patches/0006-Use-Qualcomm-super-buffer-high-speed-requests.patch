@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: CNMrLin <CNMrLin@gmail.com>
+Date: Sat, 3 Oct 2026 00:00:00 +0800
+Subject: [PATCH] Use Qualcomm super buffers for high-speed capture requests
+
+Use the app's high-speed request builder on Qualcomm devices. It reads the
+HAL batch-size capability and submits one request when super buffers are
+supported, avoiding a second request batch in the framework.
+
+---
+ smali/j9/y0.smali | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/smali/j9/y0.smali b/smali/j9/y0.smali
+--- a/smali/j9/y0.smali
++++ b/smali/j9/y0.smali
+@@ -12664,7 +12664,7 @@
+ 
+     sget-boolean v0, LJe/c;->j:Z
+ 
+-    if-eqz v0, :cond_1
++    if-nez v0, :cond_1
+ 
+     iget-object v0, p0, Lj9/y0;->w:Landroid/hardware/camera2/CameraCaptureSession;
+ 
+@@ -24887,7 +24887,7 @@
+ 
+     sget-boolean v6, LJe/c;->j:Z
+ 
+-    if-eqz v6, :cond_5
++    if-nez v6, :cond_5
+ 
+     iget-object v6, p0, Lj9/y0;->F:Lj9/g0;
+ 
+-- 
+2.43.0

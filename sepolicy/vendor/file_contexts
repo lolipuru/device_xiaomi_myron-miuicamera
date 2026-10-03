@@ -1,2 +1,5 @@
+# Camera
+/odm/lib64/libc\+\+_shared\.so    u:object_r:same_process_hal_file:s0
+
 # misys dummy
 /vendor/bin/hw/vendor\.xiaomi\.hardware\.misys-service    u:object_r:hal_misys_vendor_exec:s0
