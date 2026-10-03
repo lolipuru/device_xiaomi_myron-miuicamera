@@ -1,0 +1,14 @@
+typeattribute miuicamera_app coredomain;
+
+app_domain(miuicamera_app)
+net_domain(miuicamera_app)
+bluetooth_domain(miuicamera_app)
+platform_app_domain(miuicamera_app)
+
+# Target SDK 36 ashmem compatibility.
+allow miuicamera_app domain:memfd_file ioctl;
+allowxperm miuicamera_app domain:memfd_file ioctl ashmem_ioctls;
+allow miuicamera_app ashmem_libcutils_device:chr_file open;
+
+# Qigsaw loads plugin libraries from app data.
+allow miuicamera_app app_data_file:file execute;
