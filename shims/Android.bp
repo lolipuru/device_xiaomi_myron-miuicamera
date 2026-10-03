@@ -6,5 +6,19 @@
 
 cc_library {
     name: "libgui_shim_miuicamera",
-    srcs: ["libgui_shim_miuicamera.c"],
+    srcs: [
+        "libgui_shim_miuicamera.c",
+        "lock_image.cpp",
+        "zoommap_usage.cpp",
+    ],
+    header_libs: ["libhardware_headers"],
+    shared_libs: [
+        "libandroid_runtime",
+        "libgui",
+        "liblog",
+        "libmedia_jni_utils",
+        "libnativedisplay",
+        "libui",
+        "libutils",
+    ],
 }
