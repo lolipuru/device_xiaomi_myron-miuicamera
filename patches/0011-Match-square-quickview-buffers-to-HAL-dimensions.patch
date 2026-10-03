@@ -1,0 +1,57 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: CN MrLin <cnmrlin@users.noreply.github.com>
+Date: Sat, 3 Oct 2026 02:00:00 +0800
+Subject: [PATCH] Match square quickview buffers to HAL dimensions
+
+The rear HAL copies a 1280x960 image into the early YUV buffer. Reading it as
+1080x1080 produces striped thumbnails. Request 1280x960 and use the existing
+1:1 crop in the app.
+
+---
+diff --git a/smali/j9/j1.smali b/smali/j9/j1.smali
+--- a/smali/j9/j1.smali
++++ b/smali/j9/j1.smali
+@@ -1474,7 +1474,7 @@
+ .end method
+ 
+ .method public final v(Lj9/h0;Lj9/y0$a;Landroid/os/Handler;)V
+-    .locals 3
++    .locals 5
+ 
+     invoke-virtual {p0}, Lj9/j1;->e()V
+ 
+@@ -1490,6 +1490,34 @@
+ 
+     iget v2, p1, Lj9/h0;->W:I
+ 
++    const/16 v3, 0x23
++
++    if-ne v2, v3, :early_size_ready
++
++    const/16 v3, 0x438
++
++    if-ne v1, v3, :early_size_ready
++
++    if-ne v0, v3, :early_size_ready
++
++    iget-object v3, p2, Lj9/y0$a;->a:Lj9/y0;
++
++    iget-object v3, v3, Lj9/y0;->E:Lj9/e;
++
++    invoke-virtual {v3}, Lj9/e;->y()I
++
++    move-result v3
++
++    const/4 v4, 0x1
++
++    if-ne v3, v4, :early_size_ready
++
++    # Rear HAL uses 1280x960; Qg/f applies the square crop.
++    const/16 v1, 0x500
++
++    const/16 v0, 0x3c0
++
++    :early_size_ready
+     iget p1, p1, Lj9/h0;->Z:I
+ 
+     invoke-static {v1, v0, v2, p1}, Landroid/media/ImageReader;->newInstance(IIII)Landroid/media/ImageReader;
