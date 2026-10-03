@@ -1,0 +1,58 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: CNMrLin <CNMrLin@gmail.com>
+Date: Sat, 3 Oct 2026 00:00:00 +0800
+Subject: [PATCH] Select watermark branding from the hardware region
+
+Select the watermark model from the hardware region, falling back to
+mod_device when the region is unavailable.
+
+---
+diff --git a/smali_classes3/Je/b.smali b/smali_classes3/Je/b.smali
+--- a/smali_classes3/Je/b.smali
++++ b/smali_classes3/Je/b.smali
+@@ -5672,11 +5672,42 @@
+     return-object p0
+ 
+     :cond_24
+-    invoke-virtual {p0}, LJe/b;->G()Z
++    sget-object p0, LJe/c;->n:Ljava/lang/String;
++
++    invoke-static {p0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
++
++    move-result v3
++
++    if-nez v3, :watermark_region_fallback
++
++    const-string v3, "CN"
++
++    invoke-virtual {v3, p0}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+ 
+     move-result p0
+ 
+     if-nez p0, :cond_25
++
++    goto :watermark_global
++
++    :watermark_region_fallback
++    const-string p0, "ro.product.mod_device"
++
++    const-string v3, ""
++
++    invoke-static {p0, v3}, Lur/g;->b(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
++
++    move-result-object p0
++
++    const-string v3, "_global"
++
++    invoke-virtual {p0, v3}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result p0
++
++    if-eqz p0, :cond_25
++
++    :watermark_global
+ 
+     invoke-virtual {v6, v1}, Landroid/util/SparseArray;->get(I)Ljava/lang/Object;
+ 
+-- 
+2.43.0

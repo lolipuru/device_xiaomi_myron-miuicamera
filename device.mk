@@ -14,6 +14,10 @@ $(call soong_config_set_bool,camera,override_format_from_reserved,true)
 PRODUCT_PACKAGES += \
     vendor.xiaomi.hardware.misys-service
 
+# Watermark region
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init.miuicamera.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.miuicamera.rc
+
 # Public libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries-xiaomi.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/public.libraries-xiaomi.txt

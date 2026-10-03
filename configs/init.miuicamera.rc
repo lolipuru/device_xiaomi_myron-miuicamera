@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+
+on init && property:ro.miui.region=
+    setprop ro.miui.region ${ro.boot.hwc:-GLOBAL}
+
+on init && property:ro.miui.build.region=
+    setprop ro.miui.build.region ${ro.boot.hwc:-GLOBAL}
